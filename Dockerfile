@@ -17,6 +17,6 @@ RUN mvn dependency:go-offline -q || true
 # Expose port
 EXPOSE 8080
 
-# Start Jetty using Maven plugin
+# Start Jetty using Maven plugin with shell form to expand PORT
 ENV PORT=8080
-CMD ["mvn", "jetty:run", "-Djetty.http.port=${PORT}"]
+CMD mvn jetty:run -Djetty.http.port=$PORT
