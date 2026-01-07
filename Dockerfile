@@ -7,7 +7,8 @@ COPY . .
 
 # Build from backend directory
 WORKDIR /build/my project/backend
-RUN mvn clean package -DskipTests -q
+RUN mvn clean package -DskipTests -q && \
+    mvn dependency:copy-dependencies -DoutputDirectory=target/dependency -q
 
 # Runtime stage
 FROM eclipse-temurin:17-jre-alpine
