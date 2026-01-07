@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width,initial-scale=1" />
+	<title>Blood Match — Blood Donation</title>
+	<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+	<header class="site-header">
+		<div class="container">
+			<a class="logo" href="index.html">Blood Donation</a>
+			<button id="nav-toggle" class="nav-toggle" aria-label="Toggle navigation">☰</button>
+			<nav id="main-nav" class="main-nav">
+				<ul>
+					<li><a href="index.html">Home</a></li>
+					<li><a href="about.html">About</a></li>
+					<li><a href="contact.html">Contact</a></li>
+				</ul>
+			</nav>
+			<div class="auth-actions">
+				<a href="#" class="btn btn-outline js-login">Login</a>
+				<div id="userBadge" class="user-badge" style="display:none"></div>
+			</div>
+		</div>
+	</header>
+
+	<!-- Replace main placeholder with Find Blood Match intro + centered form -->
+	<main class="match-section" role="main">
+		<div class="match-inner container">
+			<div class="match-intro" aria-hidden="false">
+				<h1>Find Blood Match</h1>
+				<p>Find compatible blood donors in your area by providing your details. We'll help match you with suitable donors.</p>
+			</div>
+
+			<section class="match-form" aria-labelledby="match-form-title">
+				<h2 id="match-form-title" style="margin:0 0 12px; font-size:1.1rem; color:#222;">Request a match</h2>
+
+				<form action="#" method="post" novalidate data-api="match">
+					<div class="form-grid">
+						<div>
+							<label for="fullname">Full name</label>
+							<input id="fullname" name="fullname" type="text" placeholder="Your full name" required />
+						</div>
+
+						<div>
+							<label for="email">Email</label>
+							<input id="email" name="email" type="email" placeholder="you@example.com" required />
+						</div>
+
+						<div>
+							<label for="bloodtype">Blood type</label>
+							<select id="bloodtype" name="bloodtype" required>
+								<option value="">Select blood type</option>
+								<option>A+</option>
+								<option>A-</option>
+								<option>B+</option>
+								<option>B-</option>
+								<option>O+</option>
+								<option>O-</option>
+								<option>AB+</option>
+								<option>AB-</option>
+							</select>
+						</div>
+
+						<div>
+							<label for="pincode">Pincode</label>
+							<input id="pincode" name="pincode" type="text" placeholder="Postal / ZIP code" required />
+						</div>
+					<div>
+						<label for="location">Location / City</label>
+						<input id="location" name="location" type="text" placeholder="City or area name" required />
+					</div>
+						<div class="full">
+							<label for="note">Additional info (optional)</label>
+							<input id="note" name="note" type="text" placeholder="City, urgency or other notes" />
+						</div>
+					</div>
+
+					<div class="match-actions">
+						<div style="color:#666; font-size:0.95rem;">We'll use this info to search for donors nearby.</div>
+						<button type="submit" class="btn">Find Matches</button>
+					</div>
+				</form>
+				<div id="matchResults" class="match-results-box"></div>
+			</section>
+		</div>
+	</main>
+
+	<footer class="site-footer" aria-label="Site footer">
+		<div class="footer-single">
+			<div class="footer-block brand">
+				<a href="index.html" class="footer-brand">
+					<img src="https://www.citypng.com/public/uploads/preview/blood-donate-illustration-design-sign-logo-png-704081694693639fiubls9faq.png" alt="logo" class="footer-logo" />
+					<div><strong>Blood Donation</strong><div style="font-size:13px;color:var(--muted);">Connecting donors with those in need</div></div>
+				</a>
+			</div>
+			<div class="footer-block quick-links">
+				<h4>Quick Links</h4>
+				<nav style="display:flex;flex-direction:column;gap:6px;margin-top:6px;">
+					<a class="footer-link" href="index.html">Home</a>
+					<a class="footer-link" href="about.html">About</a>
+					<a class="footer-link" href="contact.html">Contact</a>
+				</nav>
+			</div>
+			<div class="footer-block resources">
+				<h4>Resources</h4>
+				<nav style="display:flex;flex-direction:column;gap:6px;margin-top:6px;">
+					<a class="footer-link" href="#">Donor Guidelines</a>
+					<a class="footer-link" href="#">Privacy Policy</a>
+				</nav>
+			</div>
+			<div class="footer-block emergency">
+				<h4>Emergency</h4>
+				<address style="font-style:normal;margin-top:6px;line-height:1.5;">
+					<div>Phone: <a href="tel:+1234567890" class="footer-link">+1 234 567 890</a></div>
+					<div>Email: <a href="mailto:help@blooddonation.example" class="footer-link">help@blooddonation.example</a></div>
+				</address>
+			</div>
+
+			<div class="footer-bottom">
+				<div class="footer-note">Helping connect donors with those in need.</div>
+				<div><a href="index.html" class="btn">Home</a></div>
+			</div>
+		</div>
+	</footer>
+
+	<!-- add modal + styles + script (same logic as other pages) -->
+	<style>
+.modal-overlay{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.45);z-index:1200}
+.modal{width:100%;max-width:420px;background:#fff;padding:18px;border-radius:10px}
+body.modal-open header, body.modal-open main, body.modal-open footer{filter:blur(4px);pointer-events:none}
+body.modal-open .modal-overlay{display:flex}
+.user-badge{margin-left:12px;padding:8px 12px;background:#ffeaea;color:#b71c1c;border-radius:20px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:8px}
+</style>
+
+<div class="modal-overlay" id="loginModal" aria-hidden="true">
+	<div class="modal" role="dialog" aria-modal="true">
+		<button class="close" id="closeModal">✕</button>
+		<h3>Login to Blood Donation</h3>
+		<form id="modalLoginForm">
+			<label for="modalPhone">Phone</label>
+			<input id="modalPhone" name="phone" type="tel" inputmode="tel" placeholder="+1 234 567 890" required style="width:100%;padding:10px;margin:8px 0;border-radius:6px;border:1px solid #e6e6e6"/>
+			<input id="modalPass" name="password" type="password" placeholder="Password" required style="width:100%;padding:10px;margin:8px 0;border-radius:6px;border:1px solid #e6e6e6"/>
+			<div style="display:flex;justify-content:space-between;margin-top:12px">
+				<button type="submit" class="btn" style="background:#ff4d4f;color:#fff;">Login</button>
+				<button type="button" id="modalCancel" class="btn btn-outline">Cancel</button>
+			</div>
+		</form>
+	</div>
+</div>
+
+	<script>
+	const matchBoxStyles = document.createElement('style');
+	matchBoxStyles.textContent = '#matchResults{margin-top:12px;padding:12px;border-radius:10px;border:1px solid #eee;background:#fff;box-shadow:0 4px 12px rgba(0,0,0,0.05);}#matchResults ul{margin:0;padding-left:18px;}#matchResults li{margin:4px 0;}';
+	document.head.appendChild(matchBoxStyles);
+	</script>
+
+	<script src="bridge.jsp"></script>
+	<script src="js/api-client.js"></script>
+
+	<script>
+(function(){
+	const modal = document.getElementById('loginModal'); const openButtons = document.querySelectorAll('.js-login');
+	const closeBtn = document.getElementById('closeModal'); const cancelBtn = document.getElementById('modalCancel');
+	const form = document.getElementById('modalLoginForm'); const userBadge = document.getElementById('userBadge');
+	function isLoggedIn(){ return !!localStorage.getItem('bd_user'); }
+	function updateBadge(){ const user = JSON.parse(localStorage.getItem('bd_user')||'null'); 
+		if(user&&user.phone){ userBadge.innerHTML = '<span>'+user.phone+'</span><button class="logout" id="logoutBtn">Logout</button>'; userBadge.style.display='inline-flex'; document.querySelectorAll('.js-login').forEach(el=>el.style.display='none'); document.getElementById('logoutBtn').addEventListener('click', ()=>{ localStorage.removeItem('bd_user'); location.href='index.html'; }); } else { userBadge.style.display='none'; document.querySelectorAll('.js-login').forEach(el=>el.style.display='inline-block'); } }
+	openButtons.forEach(b=>b.addEventListener('click', e=>{ e.preventDefault(); document.body.classList.add('modal-open'); modal.setAttribute('aria-hidden','false'); }));
+	closeBtn.addEventListener('click', ()=>{ document.body.classList.remove('modal-open'); modal.setAttribute('aria-hidden','true');});
+	cancelBtn.addEventListener('click', ()=>{ document.body.classList.remove('modal-open'); modal.setAttribute('aria-hidden','true');});
+	form.addEventListener('submit', async function(e){ e.preventDefault(); 
+		const phone=document.getElementById('modalPhone').value.trim(); const password=document.getElementById('modalPass').value.trim(); if(!phone){alert('Enter phone');return;} try{ await window.apiClient.auth.login(phone,password); }catch(err){ alert(err.message||'Login failed'); return; } localStorage.setItem('bd_user',JSON.stringify({phone})); updateBadge(); document.body.classList.remove('modal-open'); modal.setAttribute('aria-hidden','true'); location.href='index.html'; });
+	updateBadge();
+})();
+</script>
+
+	<script src="js/main.js"></script>
+</body>
+</html>

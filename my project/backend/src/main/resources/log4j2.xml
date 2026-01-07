@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration packages="org.apache.logging.log4j.core">
+    <Appenders>
+        <!-- Console Appender -->
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{ISO8601} [%-5p] [%t] %c{1} - %m%n" />
+        </Console>
+        
+        <!-- File Appender for rolling files -->
+        <RollingFile name="RollingFile" fileName="logs/blood-donation.log" 
+                     filePattern="logs/blood-donation-%d{yyyy-MM-dd}-%i.log">
+            <PatternLayout pattern="%d{ISO8601} [%-5p] [%t] %c{1} - %m%n" />
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true" />
+                <SizeBasedTriggeringPolicy size="100MB" />
+            </Policies>
+            <DefaultRolloverStrategy max="10" />
+        </RollingFile>
+    </Appenders>
+    
+    <Loggers>
+        <!-- Application Loggers -->
+        <Logger name="com.example.blood" level="info" additivity="false">
+            <AppenderRef ref="Console" />
+            <AppenderRef ref="RollingFile" />
+        </Logger>
+        
+        <!-- Root Logger -->
+        <Root level="warn">
+            <AppenderRef ref="Console" />
+        </Root>
+    </Loggers>
+</Configuration>

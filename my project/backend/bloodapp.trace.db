@@ -1,0 +1,6 @@
+2026-01-07 00:40:47.541122+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "DONORS" not found; SQL statement:
+SELECT COUNT(*) as total FROM donors WHERE status = 'approved' [42102-224]
+2026-01-07 00:41:17.508072+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "DONORS" not found; SQL statement:
+SELECT COUNT(*) as total FROM donors WHERE status = 'approved' [42102-224]

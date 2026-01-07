@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width,initial-scale=1" />
+	<title>About — Blood Donation</title>
+	<link rel="stylesheet" href="css/style.css" />
+	<!-- Added: Google font and scoped styles for the about section -->
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+	<style>
+		/* Scope styles to the about page to avoid touching global styles */
+		.about-page { font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; color: #222; }
+		.about-intro { display: flex; align-items: center; gap: 2rem; margin: 1.5rem 0; }
+
+		/* Bigger, prominent graphic for donation theme (SVG-friendly container) */
+		.about-img {
+			flex: 0 0 640px;
+			width: 640px;
+			height: 380px;
+			border-radius: 12px;
+			box-shadow: 0 10px 30px rgba(18,18,18,0.12);
+			overflow: hidden;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			background: linear-gradient(180deg,#fff 0%, #fff 60%, #fffaf1 100%);
+		}
+		.about-img svg { width: 100%; height: 100%; display: block; }
+
+		/* bigger, colorful text beside the illustration */
+		.about-text h1 {
+			margin: 0 0 0.6rem;
+			font-size: 2.2rem;
+			font-weight: 800;
+			letter-spacing: -0.4px;
+			/* subtle gradient title */
+			background: linear-gradient(90deg,#b71c1c,#ff7043);
+			-webkit-background-clip: text;
+			background-clip: text;
+			color: transparent;
+		}
+		.about-text p {
+			margin: 0;
+			color: #2f2f2f;
+			font-size: 1.125rem; /* ~18px */
+			line-height: 1.6;
+			margin-bottom: .6rem;
+		}
+		.about-text .lead { font-weight: 600; }
+		/* accent color classes for key phrases */
+		.accent { color: #c62828; font-weight: 700; }
+		.accent-2 { color: #ff7043; font-weight: 700; }
+		/* small supporting caption under the paragraph */
+		.about-text .caption { margin-top: .6rem; color: #8a2b2b; font-size: 1rem; font-weight: 600; }
+
+		/* Responsive: stack on narrow screens */
+		@media (max-width: 900px) {
+			.about-intro { flex-direction: column; text-align: center; }
+			.about-img { width: 100%; max-width: 900px; height: auto; }
+			.about-img svg { height: auto; }
+			.about-text h1 { font-size: 1.6rem; }
+		}
+		.modal-overlay{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.45);z-index:1200}
+.modal{width:100%;max-width:420px;background:#fff;padding:18px;border-radius:10px}
+body.modal-open header, body.modal-open main, body.modal-open footer{filter:blur(4px);pointer-events:none}
+body.modal-open .modal-overlay{display:flex}
+.user-badge{margin-left:12px;padding:8px 12px;background:#ffeaea;color:#b71c1c;border-radius:20px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:8px}
+	</style>
+</head>
+<body>
+	<header class="site-header">
+		<div class="container">
+			<a class="logo" href="index.html">Blood Donation</a>
+			<button id="nav-toggle" class="nav-toggle" aria-label="Toggle navigation">☰</button>
+			<nav id="main-nav" class="main-nav">
+				<ul>
+					<li><a href="index.html">Home</a></li>
+					<li><a href="about.html">About</a></li>
+					<li><a href="contact.html">Contact</a></li>
+				</ul>
+			</nav>
+			<div class="auth-actions">
+				<a href="#" class="btn btn-outline js-login">Register</a>
+				<div id="userBadge" class="user-badge" style="display:none"></div>
+			</div>
+		</div>
+	</header>
+
+	<main class="container about-page">
+		<section class="about">
+			<!-- Replaced: single h1/p with a two-column intro (image + text) aligned in a line -->
+			<div class="about-intro">
+				<!-- Inline SVG illustration for "blood donation" (reliable and scalable) -->
+				<div class="about-img" role="img" aria-label="Illustration of blood donation: donors, blood bag and medical staff">
+					<svg viewBox="0 0 1200 720" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+						<defs>
+							<linearGradient id="g1" x1="0" x2="0" y1="0" y2="1">
+								<stop offset="0" stop-color="#ff5a5a"/>
+								<stop offset="1" stop-color="#c62828"/>
+							</linearGradient>
+							<filter id="s" x="-20%" y="-20%" width="140%" height="140%">
+								<feDropShadow dx="0" dy="10" stdDeviation="20" flood-color="#b00020" flood-opacity="0.12"/>
+							</filter>
+						</defs>
+
+						<!-- background soft shape -->
+						<rect x="0" y="0" width="1200" height="720" fill="none"/>
+
+						<!-- stylized blood drop -->
+						<g transform="translate(120,40)">
+							<path d="M420 60c0 0-180 150-180 300s80 220 180 220 180-80 180-220-180-300-180-300z" fill="url(#g1)" filter="url(#s)"/>
+							<!-- white cross inside drop -->
+							<g transform="translate(360,230) scale(1.4)" fill="#fff">
+								<rect x="-18" y="-48" width="36" height="96" rx="6"/>
+								<rect x="-48" y="-18" width="96" height="36" rx="6"/>
+							</g>
+						</g>
+
+						<!-- blood bag icon -->
+						<g transform="translate(620,210) scale(0.9)">
+							<rect x="50" y="20" width="160" height="240" rx="14" fill="#fffaf5" stroke="#f2a0a0" stroke-width="6"/>
+							<path d="M130 0v32" stroke="#f2a0a0" stroke-width="6" stroke-linecap="round"/>
+							<circle cx="130" cy="130" r="34" fill="#c62828"/>
+							<rect x="118" y="122" width="24" height="16" rx="4" fill="#fff"/>
+						</g>
+
+						<!-- small donor + staff silhouettes -->
+						<g transform="translate(580,430)">
+							<!-- donor -->
+							<g transform="translate(0,0)" fill="#6b6b6b">
+								<circle cx="40" cy="20" r="20"/>
+								<rect x="10" y="44" width="60" height="34" rx="10"/>
+							</g>
+							<!-- staff -->
+							<g transform="translate(140,0)" fill="#444">
+								<circle cx="40" cy="20" r="20"/>
+								<rect x="10" y="44" width="60" height="34" rx="8"/>
+								<rect x="30" y="52" width="28" height="8" rx="4" fill="#fff"/>
+							</g>
+						</g>
+
+						<!-- subtle caption-style dot pattern for context -->
+						<g transform="translate(50,520)" fill="#ffeaea" opacity="0.7">
+							<circle cx="0" cy="0" r="6"/>
+							<circle cx="30" cy="0" r="6"/>
+							<circle cx="60" cy="0" r="6"/>
+						</g>
+					</svg>
+				</div>
+				<div class="about-text">
+					<h1>About</h1>
+					<p class="lead">Learn more about our mission to <span class="accent">save lives</span> through efficient <span class="accent-2">blood donation</span> and matching services.</p>
+					<p class="caption">Fast, <span class="accent">safe</span> and <span class="accent-2">trusted</span> — connecting donors with people who need blood across the country.</p>
+				</div>
+ 			</div>
+		</section>
+
+		<!-- Three attractive feature cards with icons -->
+		<div class="about-cards">
+			<div class="about-card">
+				<div class="card-icon">
+					<img src="https://img.icons8.com/fluency/48/000000/speed.png" alt="Fast Matching icon" />
+				</div>
+				<div class="card-body">
+					<h3>Fast Matching</h3>
+					<p>Match donors and recipients quickly using our efficient search and notification system.</p>
+				</div>
+			</div>
+
+			<div class="about-card">
+				<div class="card-icon">
+					<img src="https://img.icons8.com/fluency/48/000000/approval--v1.png" alt="Verified Donors icon" />
+				</div>
+				<div class="card-body">
+					<h3>Verified Donors</h3>
+					<p>Donors are screened and verified to ensure safety and reliability for all donations.</p>
+				</div>
+			</div>
+
+			<div class="about-card">
+				<div class="card-icon">
+					<img src="https://cdn-icons-png.freepik.com/256/1324/1324853.png?semt=ais_white_label" alt="Nationwide Reach icon" />
+				</div>
+				<div class="card-body">
+					<h3>Nationwide Reach</h3>
+					<p>We coordinate donations across a large network of centers and mobile drives to increase availability.</p>
+				</div>
+			</div>
+		</div>
+
+		<!-- Our Values section with four attractive value cards -->
+		<div class="our-values">
+			<h2 style="text-align:center; margin-bottom:1rem;">Our Values</h2>
+			<div class="values-cards">
+				<div class="value-card">
+					<div class="value-icon"><img src="https://img.icons8.com/fluency/48/000000/like.png" alt="Compassion icon" /></div>
+					<strong>Compassion</strong>
+					<p>We care for every life and support donors and recipients with empathy.</p>
+				</div>
+
+				<div class="value-card">
+					<div class="value-icon"><img src="https://img.icons8.com/fluency/48/000000/handshake.png" alt="Integrity icon" /></div>
+					<strong>Integrity</strong>
+					<p>Transparent and ethical processes guide everything we do.</p>
+				</div>
+
+				<div class="value-card">
+					<div class="value-icon"><img src="https://img.icons8.com/fluency/48/000000/shield.png" alt="Safety icon" /></div>
+					<strong>Safety</strong>
+					<p>Donor and recipient safety is our top priority during every step.</p>
+				</div>
+
+				<div class="value-card">
+					<div class="value-icon"><img src="https://img.icons8.com/fluency/48/000000/conference-call.png" alt="Collaboration icon" /></div>
+					<strong>Collaboration</strong>
+					<p>We work with partners and communities to increase impact and reach.</p>
+				</div>
+			</div>
+		</div>
+	</main>
+
+	<footer class="site-footer">
+		<div class="footer-single">
+			<div class="footer-block brand">
+				<a href="index.html" class="footer-brand" style="display:flex;align-items:center;gap:10px;text-decoration:none;color:inherit;">
+					<img src="https://www.citypng.com/public/uploads/preview/blood-donate-illustration-design-sign-logo-png-704081694693639fiubls9faq.png" alt="logo" style="height:44px;width:auto;border-radius:6px;" />
+					<div><strong>Blood Donation</strong><div style="font-size:13px;color:var(--muted);">Connecting donors with those in need</div></div>
+				</a>
+			</div>
+
+			<div class="footer-block quick-links">
+				<h4>Quick Links</h4>
+				<nav style="display:flex;flex-direction:column;gap:6px;margin-top:6px;">
+					<a class="footer-link" href="index.html">Home</a>
+					<a class="footer-link" href="contact.html">Contact</a>
+				</nav>
+			</div>
+
+			<div class="footer-block resources">
+				<h4>Resources</h4>
+				<nav style="display:flex;flex-direction:column;gap:6px;margin-top:6px;">
+					<a class="footer-link" href="#">Donor Guidelines</a>
+					<a class="footer-link" href="#">Privacy Policy</a>
+				</nav>
+			</div>
+
+			<div class="footer-block emergency">
+				<h4>Emergency</h4>
+				<address style="font-style:normal;margin-top:6px;line-height:1.5;">
+					<div>Phone: <a href="tel:+1234567890" class="footer-link">+1 234 567 890</a></div>
+					<div>Email: <a href="mailto:help@blooddonation.example" class="footer-link">help@blooddonation.example</a></div>
+				</address>
+			</div>
+
+			<div class="footer-bottom">
+				<div class="footer-note">Helping connect donors with those in need.</div>
+				<div><a href="index.html" class="btn">Home</a></div>
+			</div>
+		</div>
+	</footer>
+
+	<!-- modal + styles + small script (same behavior as index) -->
+<div class="modal-overlay" id="loginModal" aria-hidden="true">
+	<div class="modal" role="dialog" aria-modal="true">
+		<button class="close" id="closeModal">✕</button>
+		<h3>Register to Blood Donation</h3>
+		<form id="modalLoginForm">
+			<label for="modalPhone">Phone</label>
+			<input id="modalPhone" name="phone" type="tel" inputmode="tel" placeholder="+1 234 567 890" required style="width:100%;padding:10px;margin:8px 0;border-radius:6px;border:1px solid #e6e6e6"/>
+			<input id="modalPass" name="password" type="password" placeholder="Password" required style="width:100%;padding:10px;margin:8px 0;border-radius:6px;border:1px solid #e6e6e6"/>
+			<div style="display:flex;justify-content:space-between;margin-top:12px">
+				<button type="submit" class="btn" style="background:#ff4d4f;color:#fff;">Register</button>
+				<button type="button" id="modalCancel" class="btn btn-outline">Cancel</button>
+			</div>
+		</form>
+	</div>
+</div>
+
+
+<script src="bridge.jsp"></script>
+<script src="js/api-client.js"></script>
+
+<script>
+(function(){
+	const modal = document.getElementById('loginModal');
+	const openButtons = document.querySelectorAll('.js-login');
+	const closeBtn = document.getElementById('closeModal');
+	const cancelBtn = document.getElementById('modalCancel');
+	const form = document.getElementById('modalLoginForm');
+	const userBadge = document.getElementById('userBadge');
+
+	function isLoggedIn(){ return !!localStorage.getItem('bd_user'); }
+	function updateBadge(){
+		const user = JSON.parse(localStorage.getItem('bd_user')||'null');
+		if(user && user.phone){
+			userBadge.innerHTML = '<span>'+user.phone+'</span><button class="logout" id="logoutBtn">Logout</button>';
+			userBadge.style.display = 'inline-flex';
+			document.querySelectorAll('.js-login').forEach(el => el.style.display='none');
+			document.getElementById('logoutBtn').addEventListener('click', ()=>{ localStorage.removeItem('bd_user'); location.href='index.html'; });
+		} else {
+			userBadge.style.display = 'none';
+			document.querySelectorAll('.js-login').forEach(el => el.style.display='inline-block');
+		}
+	}
+	openButtons.forEach(b => b.addEventListener('click', e=>{ e.preventDefault(); document.body.classList.add('modal-open'); modal.setAttribute('aria-hidden','false'); }));
+	closeBtn.addEventListener('click', ()=>{ document.body.classList.remove('modal-open'); modal.setAttribute('aria-hidden','true');});
+	cancelBtn.addEventListener('click', ()=>{ document.body.classList.remove('modal-open'); modal.setAttribute('aria-hidden','true');});
+	form.addEventListener('submit', async function(e){ e.preventDefault(); const phone=document.getElementById('modalPhone').value.trim(); const pass=document.getElementById('modalPass').value.trim(); if(!phone){alert('Enter phone');return;} try { await window.apiClient.auth.register(phone, pass); } catch(err){ alert(err.message||'Registration failed'); return; } localStorage.setItem('bd_user',JSON.stringify({phone})); updateBadge(); document.body.classList.remove('modal-open'); modal.setAttribute('aria-hidden','true'); location.href='index.html'; });
+	// restrict hero-btns linking to donor/bmatch
+	document.addEventListener('click', function(e){ const btn = e.target.closest && e.target.closest('.hero-btn'); if(!btn) return; const href = btn.getAttribute('href')||''; if(/donor\.html|bmatch\.html/.test(href) && !isLoggedIn()){ e.preventDefault(); document.body.classList.add('modal-open'); modal.setAttribute('aria-hidden','false'); }});
+	updateBadge();
+})();
+</script>
+	<script src="js/main.js"></script>
+</body>
+</html>

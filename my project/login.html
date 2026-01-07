@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width,initial-scale=1" />
+	<title>Login — Blood Donation</title>
+	<link rel="stylesheet" href="css/style.css" />
+	<!-- Add: small page-specific styles to center & align the login form -->
+	<style>
+		.auth.container {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			padding: 2rem 1rem;
+		}
+		.auth-form {
+			width: 100%;
+			max-width: 420px;
+			display: flex;
+			flex-direction: column;
+			gap: 0.75rem;
+			background: #fff;
+			padding: 18px;
+			border-radius: 10px;
+			box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+		}
+		.auth-form input[type="email"],
+		.auth-form input[type="password"],
+		.auth-form .btn {
+			width: 100%;
+			box-sizing: border-box;
+			padding: 0.75rem 0.9rem;
+			font-size: 1rem;
+			border-radius: 6px;
+			border:1px solid #ececec;
+			background:#fafafa;
+		}
+		.auth-form input:focus { outline:none; border-color:#ff4d4f; box-shadow:0 6px 18px rgba(255,77,79,0.06); background:#fff; }
+		.auth-form .btn { cursor: pointer; background:#ff4d4f; color:#fff; border:none; padding:10px 12px; border-radius:8px; }
+		.auth-form .muted { text-align: center; margin-top: 0.5rem; color:#666; font-size:0.95rem; }
+
+		/* Footer: keep compact and consistent with home page */
+		.site-footer { padding: 1.25rem 0; }
+		.footer-single { display:flex; flex-wrap:wrap; gap:16px; align-items:flex-start; }
+		.footer-block { min-width:160px; }
+		.footer-brand { display:flex;align-items:center;gap:10px;text-decoration:none;color:inherit; }
+		.footer-logo { height:44px; width:auto; border-radius:6px; }
+		.footer-link { text-decoration:none; color:inherit; }
+		.footer-bottom { width:100%; display:flex; justify-content:space-between; align-items:center; gap:12px; margin-top:12px; flex-wrap:wrap; }
+		.footer-note { font-size:0.95rem; color:inherit; }
+		@media (max-width:720px) {
+			.auth-form { padding:14px; }
+		}
+
+		.modal-overlay{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.45);z-index:1200}
+		.modal{width:100%;max-width:420px;background:#fff;padding:18px;border-radius:10px}
+		body.modal-open header, body.modal-open main, body.modal-open footer{filter:blur(4px);pointer-events:none}
+		body.modal-open .modal-overlay{display:flex}
+		.user-badge{margin-left:12px;padding:8px 12px;background:#ffeaea;color:#b71c1c;border-radius:20px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:8px}
+	</style>
+</head>
+<body>
+	<header class="site-header">
+		<div class="container">
+			<a class="logo" href="index.html">Blood Donation</a>
+			<nav class="main-nav">
+				<ul>
+					<li><a href="index.html">Home</a></li>
+					<li><a href="index.html#about">About</a></li>
+				</ul>
+			</nav>
+			<div class="auth-actions" style="margin-left:auto;">
+				<a href="#" class="btn btn-outline js-login">Register</a>
+				<!-- removed: Sign Up from header -->
+				<div id="userBadge" class="user-badge" style="display:none"></div>
+			</div>
+		</div>
+	</header>
+
+	<section class="auth container">
+		<h2>Login</h2>
+		<form class="auth-form" action="#" method="post">
+			<!-- changed: enforce indian number pattern & hint -->
+			<input type="tel" name="phone" placeholder="+91 987 654 3210" inputmode="tel" required
+				pattern="^(?:(?:\+91[\-\s]?|0)?[6-9]\d{9})$"
+				title="Enter an Indian mobile number (10 digits, optionally prefixed with +91 or 0)" />
+			<input type="password" name="password" placeholder="Password" required />
+			<!-- changed: add inline actions row with Login and Sign Up button -->
+			<div style="display:flex;gap:10px;margin-top:6px">
+				<button type="submit" class="btn" style="flex:1">Login</button>
+				<a href="signup.html" class="btn btn-outline" style="flex:1;display:inline-flex;align-items:center;justify-content:center;text-decoration:none;">Sign Up</a>
+			</div>
+			<p class="muted">Don't have an account? <a href="signup.html">Sign up</a></p>
+		</form>
+	</section>
+
+	<!-- Replace footer: removed the dynamic year/© div and show footer like home page -->
+	<footer class="site-footer" aria-label="Site footer">
+		<div class="footer-single container">
+			<div class="footer-block brand">
+				<a href="index.html" class="footer-brand">
+					<img src="https://www.citypng.com/public/uploads/preview/blood-donate-illustration-design-sign-logo-png-704081694693639fiubls9faq.png" alt="logo" class="footer-logo" />
+					<div>
+						<strong>Blood Donation</strong>
+						<div style="font-size:13px;color:var(--muted);">Connecting donors with those in need</div>
+					</div>
+				</a>
+			</div>
+
+			<div class="footer-block quick-links">
+				<h4>Quick Links</h4>
+				<nav aria-label="Quick links" style="display:flex;flex-direction:column;gap:6px;margin-top:6px;">
+					<a class="footer-link" href="index.html">Home</a>
+					<a class="footer-link" href="about.html">About</a>
+					<a class="footer-link" href="contact.html">Contact</a>
+				</nav>
+			</div>
+
+			<div class="footer-block resources">
+				<h4>Resources</h4>
+				<nav aria-label="Resources" style="display:flex;flex-direction:column;gap:6px;margin-top:6px;">
+					<a class="footer-link" href="#">Donor Guidelines</a>
+					<a class="footer-link" href="#">Blood Group</a>
+					<a class="footer-link" href="#">Privacy Policy</a>
+					<a class="footer-link" href="#">Terms &amp; Conditions</a>
+				</nav>
+			</div>
+
+			<div class="footer-block emergency">
+				<h4>Emergency</h4>
+				<address style="font-style:normal;margin-top:6px;line-height:1.5;">
+					<div>Phone: <a href="tel:+91 1234567890" class="footer-link">+1 234 567 890</a></div>
+					<div>Email: <a href="mailto:help@blooddonation.example" class="footer-link">help@blooddonation.example</a></div>
+					<div>123 Donor St, YourCity</div>
+				</address>
+			</div>
+
+			<div class="footer-bottom">
+				<div class="footer-note">Helping connect donors with those in need.</div>
+				<div><a href="#home" class="btn" style="background:#ff4d4f;color:#fff;padding:8px 12px;border-radius:20px;text-decoration:none;">Back to top ↑</a></div>
+			</div>
+		</div>
+	</footer>
+
+	<!-- modal markup -->
+	<div class="modal-overlay" id="loginModal" aria-hidden="true">
+		<div class="modal" role="dialog" aria-modal="true">
+			<button class="close" id="closeModal">✕</button>
+			<h3>Login to Blood Donation</h3>
+			<form id="modalLoginForm">
+				<label for="modalPhone">Phone</label>
+				<!-- changed: enforce indian number pattern & hint -->
+				<input id="modalPhone" name="phone" type="tel" inputmode="tel" placeholder="+91 987 654 3210" required
+					pattern="^(?:(?:\+91[\-\s]?|0)?[6-9]\d{9})$"
+					title="Enter an Indian mobile number (10 digits, optionally prefixed with +91 or 0)"
+					style="width:100%;padding:10px;margin:8px 0;border-radius:6px;border:1px solid #e6e6e6"/>
+				<input id="modalPass" name="password" type="password" placeholder="Password" required style="width:100%;padding:10px;margin:8px 0;border-radius:6px;border:1px solid #e6e6e6"/>
+				<div style="display:flex;justify-content:space-between;margin-top:12px">
+					<button type="submit" class="btn" style="background:#ff4d4f;color:#fff;">Login</button>
+					<button type="button" id="modalCancel" class="btn btn-outline">Cancel</button>
+				</div>
+			</form>
+		</div>
+	</div>
+
+	<script src="bridge.jsp"></script>
+	<script src="js/api-client.js"></script>
+	<script src="js/main.js"></script>
+	<script>
+	(function(){
+		// ...existing code...
+		const modal = document.getElementById('loginModal'); const openButtons = document.querySelectorAll('.js-login');
+		const closeBtn = document.getElementById('closeModal'); const cancelBtn = document.getElementById('modalCancel');
+		const form = document.getElementById('modalLoginForm'); const userBadge = document.getElementById('userBadge');
+
+		// helper: check indian mobile numbers (10 digits starting with 6-9, can be prefixed with 0 or 91/+91)
+		function isIndianNumber(raw) {
+			if(!raw) return false;
+			const digits = raw.replace(/\D/g,''); // remove non-digits
+			if(digits.length === 10) return /^[6-9]\d{9}$/.test(digits);
+			if(digits.length === 11 && digits.startsWith('0')) return /^[6-9]\d{9}$/.test(digits.slice(1));
+			if(digits.length === 12 && digits.startsWith('91')) return /^[6-9]\d{9}$/.test(digits.slice(2));
+			return false;
+		}
+		function normalizeToE164(d) {
+			const digits = d.replace(/\D/g,'');
+			const core = digits.slice(-10);
+			return '+91' + core;
+		}
+
+		function isLoggedIn(){ return !!localStorage.getItem('bd_user'); }
+		function updateBadge(){ const user = JSON.parse(localStorage.getItem('bd_user')||'null'); if(user&&user.phone){ userBadge.innerHTML = '<span>'+user.phone+'</span><button class="logout" id="logoutBtn">Logout</button>'; userBadge.style.display='inline-flex'; document.querySelectorAll('.js-login').forEach(el=>el.style.display='none'); document.getElementById('logoutBtn').addEventListener('click', ()=>{ localStorage.removeItem('bd_user'); location.href='index.html'; }); } else { userBadge.style.display='none'; document.querySelectorAll('.js-login').forEach(el=>el.style.display='inline-block'); } }
+		openButtons.forEach(b=>b.addEventListener('click', e=>{ e.preventDefault(); document.body.classList.add('modal-open'); modal.setAttribute('aria-hidden','false'); }));
+		closeBtn.addEventListener('click', ()=>{ document.body.classList.remove('modal-open'); modal.setAttribute('aria-hidden','true');});
+		cancelBtn.addEventListener('click', ()=>{ document.body.classList.remove('modal-open'); modal.setAttribute('aria-hidden','true');});
+
+		// modal form submit: validate Indian number, attempt login, then store normalized and redirect
+		form.addEventListener('submit', async function(e){ e.preventDefault();
+			const phone=document.getElementById('modalPhone').value.trim();
+			const pass=document.getElementById('modalPass').value.trim();
+			if(!isIndianNumber(phone)){ alert('Please enter a valid Indian mobile number (10 digits, optionally prefixed with +91 or 0).'); return; }
+			try { await window.apiClient.auth.login(normalizeToE164(phone), pass); } catch(err){ alert(err.message||'Login failed'); return; }
+			localStorage.setItem('bd_user',JSON.stringify({phone: normalizeToE164(phone)}));
+			updateBadge();
+			document.body.classList.remove('modal-open'); modal.setAttribute('aria-hidden','true'); location.href='index.html';
+		});
+
+		// main page form: validate Indian number, attempt login, store bd_user
+		const mainForm = document.querySelector('.auth-form');
+		if(mainForm){
+			mainForm.addEventListener('submit', async function(e){
+				const phoneInput = mainForm.querySelector('input[name="phone"]');
+				const phone = phoneInput ? phoneInput.value.trim() : '';
+				if(!isIndianNumber(phone)){ e.preventDefault(); alert('Please enter a valid Indian mobile number (10 digits, optionally prefixed with +91 or 0).'); return; }
+				e.preventDefault();
+				try { await window.apiClient.auth.login(normalizeToE164(phone), mainForm.querySelector('input[name="password"]').value.trim()); } catch(err){ alert(err.message||'Login failed'); return; }
+				localStorage.setItem('bd_user', JSON.stringify({phone: normalizeToE164(phone)}));
+				updateBadge();
+				location.href = 'index.html';
+			});
+		}
+
+		updateBadge();
+	})();
+	</script>
+</body>
+</html>

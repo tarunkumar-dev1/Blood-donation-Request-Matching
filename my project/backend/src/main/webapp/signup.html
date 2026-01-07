@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width,initial-scale=1" />
+	<title>Sign Up — Blood Donation</title>
+	<link rel="stylesheet" href="css/style.css" />
+	<!-- Improve signup page styling -->
+	<style>
+		:root{
+			--accent:#ff4d4f;
+			--muted:#6b6b6b;
+			--card-bg:#ffffff;
+			--page-bg:linear-gradient(180deg, #fff, #fff 40%, #fffaf9);
+			--shadow: 0 10px 30px rgba(0,0,0,0.06);
+		}
+
+		body { background: var(--page-bg); }
+
+		.auth.container {
+			display: flex;
+			justify-content: center;
+			padding: 48px 16px;
+		}
+		.auth-card {
+			width: 100%;
+			max-width: 480px;
+			background: var(--card-bg);
+			border-radius: 14px;
+			padding: 24px;
+			box-shadow: var(--shadow);
+			border: 1px solid rgba(0,0,0,0.03);
+		}
+		.auth-card h2 {
+			margin: 0 0 6px;
+			color: var(--accent);
+			font-size: 1.45rem;
+			letter-spacing: .2px;
+		}
+		.auth-card .lead {
+			margin: 0 0 14px;
+			color: var(--muted);
+			font-size: 0.98rem;
+		}
+
+		.auth-form {
+			display: flex;
+			flex-direction: column;
+			gap: 12px;
+		}
+		.auth-form label { font-size:0.9rem; color:#333; margin-bottom:6px; display:block; }
+		.auth-form input[type="text"],
+		.auth-form input[type="email"],
+		.auth-form input[type="password"] {
+			width: 100%;
+			padding: 12px 14px;
+			font-size: 1rem;
+			border-radius: 8px;
+			border: 1px solid #e9e9e9;
+			background:#fbfbfb;
+			box-sizing:border-box;
+			transition: box-shadow .12s, border-color .12s;
+		}
+		.auth-form input:focus {
+			outline: none;
+			border-color: var(--accent);
+			box-shadow: 0 8px 20px rgba(255,77,79,0.06);
+			background: #fff;
+		}
+		.auth-form .btn {
+			margin-top:6px;
+			background: var(--accent);
+			color: #fff;
+			padding: 12px;
+			border-radius: 10px;
+			border: none;
+			font-weight: 600;
+			cursor: pointer;
+		}
+		.auth-form .btn:hover { filter:brightness(.98); transform: translateY(-1px); }
+
+		.auth-form .muted { text-align: center; margin-top: 8px; color:var(--muted); font-size:0.95rem; }
+
+		/* make small screens comfortable */
+		@media (max-width:520px) {
+			.auth.container { padding: 28px 12px; }
+			.auth-card { padding:18px; border-radius:12px; }
+		}
+	</style>
+</head>
+<body>
+	<header class="site-header">
+		<div class="container">
+			<a class="logo" href="index.html">Blood Donation</a>
+			<nav class="main-nav">
+				<ul>
+					<li><a href="index.html">Home</a></li>
+					<li><a href="index.html#about">About</a></li>
+				</ul>
+			</nav>
+		</div>
+	</header>
+
+	<section class="auth container">
+		<div class="auth-card">
+			<h2>Sign Up</h2>
+			<p class="lead">Create an account to join the donor community — it only takes a minute.</p>
+
+			<form class="auth-form" action="#" method="post">
+				<label for="fullname">Full name</label>
+				<input id="fullname" type="text" name="fullname" placeholder="Full name" required />
+
+				<label for="phone">Phone (India)</label>
+				<input id="phone" type="tel" name="phone" placeholder="+91 987 654 3210" inputmode="tel" required
+					pattern="^(?:(?:\+91[\-\s]?|0)?[6-9]\d{9})$"
+					title="Enter an Indian mobile number (10 digits, optionally prefixed with +91 or 0)" />
+
+				<label for="password">Password</label>
+				<input id="password" type="password" name="password" placeholder="Password" required />
+
+				<button type="submit" class="btn">Create Account</button>
+
+				<p class="muted">Already have an account? <a href="login.html">Login</a></p>
+			</form>
+		</div>
+	</section>
+
+	<!-- Replace footer: removed the dynamic year/© div and show footer like home page -->
+	<footer class="site-footer" aria-label="Site footer">
+		<div class="footer-single container">
+			<div class="footer-block brand">
+				<a href="index.html" class="footer-brand" style="display:flex;align-items:center;gap:10px;text-decoration:none;color:inherit;">
+					<img src="https://www.citypng.com/public/uploads/preview/blood-donate-illustration-design-sign-logo-png-704081694693639fiubls9faq.png" alt="logo" style="height:44px;width:auto;border-radius:6px;" />
+					<div>
+						<strong>Blood Donation</strong>
+						<div style="font-size:13px;color:var(--muted);">Connecting donors with those in need</div>
+					</div>
+				</a>
+			</div>
+
+			<div class="footer-block quick-links">
+				<h4>Quick Links</h4>
+				<nav aria-label="Quick links" style="display:flex;flex-direction:column;gap:6px;margin-top:6px;">
+					<a class="footer-link" href="index.html">Home</a>
+					<a class="footer-link" href="about.html">About</a>
+					<a class="footer-link" href="contact.html">Contact</a>
+				</nav>
+			</div>
+
+			<div class="footer-block resources">
+				<h4>Resources</h4>
+				<nav aria-label="Resources" style="display:flex;flex-direction:column;gap:6px;margin-top:6px;">
+					<a class="footer-link" href="#">Donor Guidelines</a>
+					<a class="footer-link" href="#">Blood Group</a>
+					<a class="footer-link" href="#">Privacy Policy</a>
+					<a class="footer-link" href="#">Terms &amp; Conditions</a>
+				</nav>
+			</div>
+
+			<div class="footer-block emergency">
+				<h4>Emergency</h4>
+				<address style="font-style:normal;margin-top:6px;line-height:1.5;">
+					<div>Phone: <a href="tel:+91234567890" class="footer-link">+1 234 567 890</a></div>
+					<div>Email: <a href="mailto:help@blooddonation.example" class="footer-link">help@blooddonation.example</a></div>
+					<div>123 Donor St, YourCity</div>
+				</address>
+			</div>
+
+			<div class="footer-bottom">
+				<div class="footer-note">Helping connect donors with those in need.</div>
+				<div><a href="#home" class="btn" style="background:#ff4d4f;color:#fff;padding:8px 12px;border-radius:20px;text-decoration:none;">Back to top ↑</a></div>
+			</div>
+		</div>
+	</footer>
+
+	<script src="bridge.jsp"></script>
+	<script src="js/api-client.js"></script>
+	<script src="js/main.js"></script>
+	<script>
+	(function(){
+		const form = document.querySelector('.auth-form');
+		if(!form) return;
+		function isIndianNumber(raw){
+			if(!raw) return false;
+			const digits = raw.replace(/\D/g,'');
+			if(digits.length === 10) return /^[6-9]\d{9}$/.test(digits);
+			if(digits.length === 11 && digits.startsWith('0')) return /^[6-9]\d{9}$/.test(digits.slice(1));
+			if(digits.length === 12 && digits.startsWith('91')) return /^[6-9]\d{9}$/.test(digits.slice(2));
+			return false;
+		}
+		function normalizeToE164(d){
+			const digits = d.replace(/\D/g,'');
+			const core = digits.slice(-10);
+			return '+91' + core;
+		}
+		form.addEventListener('submit', async function(e){
+			e.preventDefault();
+			const fullName = document.getElementById('fullname').value.trim();
+			const phone = document.getElementById('phone').value.trim();
+			const password = document.getElementById('password').value.trim();
+			if(!fullName || !phone || !password){ alert('Fill all fields'); return; }
+			if(!isIndianNumber(phone)){ alert('Enter a valid Indian mobile number (10 digits, optionally prefixed with +91 or 0).'); return; }
+			try { await window.apiClient.auth.register(normalizeToE164(phone), password); } catch(err){ alert(err.message || 'Signup failed'); return; }
+			localStorage.setItem('bd_user', JSON.stringify({ phone: normalizeToE164(phone), name: fullName }));
+			alert('Account created');
+			form.reset();
+		});
+	})();
+	</script>
+</body>
+</html>

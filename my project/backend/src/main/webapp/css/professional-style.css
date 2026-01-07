@@ -1,0 +1,127 @@
+/* Professional Homepage Enhancements */
+
+/* Better section spacing and backgrounds */
+#home.hero {
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.08) 0%, rgba(118, 75, 162, 0.08) 100%);
+    padding: 100px 0 80px 0 !important;
+}
+
+.blood-groups {
+    background: #f9fafb;
+    padding: 80px 0 !important;
+}
+
+.statistics {
+    background: #ffffff;
+    padding: 80px 0 !important;
+}
+
+.how-it-works {
+    background: #f9fafb;
+    padding: 80px 0 !important;
+}
+
+.contact {
+    background: #ffffff;
+    padding: 80px 0 !important;
+}
+
+/* Better contact section alignment */
+.contact .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    text-align: center;
+}
+
+.contact h2 {
+    text-align: center;
+    width: 100%;
+}
+
+.contact .contact-form {
+    margin: 0 auto;
+}
+
+/* Improved card styling with better shadows and hover effects */
+.group-card, .stat-card, .how-card {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+}
+
+.group-card:hover, .stat-card:hover, .how-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 12px 40px rgba(102, 126, 234, 0.2) !important;
+}
+
+/* Better typography for cards */
+.group-name, .stat-label, .how-title {
+    font-weight: 700 !important;
+    font-size: 1.4rem !important;
+    color: #2c3e50 !important;
+    margin-bottom: 12px !important;
+}
+
+.stat-value {
+    font-size: 2.8rem !important;
+    font-weight: 800 !important;
+    margin: 16px 0 !important;
+}
+
+/* Professional section titles */
+h2 {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 48px !important;
+}
+
+h2::after {
+    content: '';
+    position: absolute;
+    bottom: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 2px;
+}
+
+/* Better grid layouts with consistent gaps */
+.group-cards {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.stats-grid {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.how-grid {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    #home.hero {
+        padding: 60px 0 40px 0 !important;
+    }
+    
+    .blood-groups, .statistics, .how-it-works, .contact {
+        padding: 60px 0 !important;
+    }
+    
+    h2 {
+        font-size: 32px !important;
+    }
+}
