@@ -1,17 +1,12 @@
 FROM maven:3.9-eclipse-temurin-17-alpine AS build
 
-WORKDIR /app
+WORKDIR /build
 
-# Copy pom.xml
-COPY "my project/backend/pom.xml" ./pom.xml
+# Copy entire project
+COPY . .
 
-# Download dependencies
-RUN mvn dependency:go-offline -q
-
-# Copy source code
-COPY "my project/backend/src" ./src
-
-# Build application
+# Build from backend directory
+WORKDIR /build/my project/backend
 RUN mvn clean package -DskipTests -q
 
 # Runtime stage
@@ -20,8 +15,8 @@ FROM eclipse-temurin:17-jre-alpine
 WORKDIR /app
 
 # Copy built artifacts from build stage
-COPY --from=build /app/target/classes ./target/classes
-COPY --from=build /app/target/dependency ./target/dependency
+COPY --from=build /build/my project/backend/target/classes ./target/classes
+COPY --from=build /build/my project/backend/target/dependency ./target/dependency
 
 # Expose port
 EXPOSE 8080
