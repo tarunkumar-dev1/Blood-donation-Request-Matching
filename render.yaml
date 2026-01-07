@@ -10,8 +10,4 @@ services:
         value: bloodadmin
       - key: ADMIN_PASS
         value: BloodApp2026!Secure
-      - key: DB_TYPE
-        value: h2
-      - key: PORT
-        value: 8080
     autoDeploy: true
