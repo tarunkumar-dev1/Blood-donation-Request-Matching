@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" role="img" aria-label="Blood Donation logo">
+  <title>Blood Donation</title>
+  <path fill="#e63946" d="M32 6c-8 12-18 22-18 32a18 18 0 1036 0c0-10-10-20-18-32z"/>
+  <circle cx="32" cy="44" r="6" fill="#ffffff" opacity="0.35"/>
+</svg>
