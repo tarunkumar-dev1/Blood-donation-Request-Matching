@@ -1,9 +1,7 @@
 services:
   - type: web
     name: blood-donation-api
-    runtime: java
-    buildCommand: mvn -f "my project/backend/pom.xml" clean package
-    startCommand: java -cp "my project/backend/target/classes:my project/backend/target/dependency/*" -Dport=$PORT org.eclipse.jetty.ee10.maven.plugin.MavenWebAppContext
+    runtime: docker
     plan: free
     envVars:
       - key: ADMIN_USER

@@ -1,4 +1,4 @@
-FROM maven:3.9-eclipse-temurin-17-alpine AS build
+FROM maven:3.9-eclipse-temurin-17-alpine
 
 WORKDIR /app
 
@@ -8,21 +8,15 @@ COPY . .
 # Move backend to clean path without spaces
 RUN cp -r "./my project/backend" /backend
 
-# Build from clean path
+# Set working directory to backend
 WORKDIR /backend
-RUN mvn clean package -DskipTests -q
 
-# Runtime stage
-FROM eclipse-temurin:17-jre-alpine
-
-WORKDIR /app
-
-# Copy from clean path (no spaces)
-COPY --from=build /backend/target ./target
+# Download dependencies for faster startup
+RUN mvn dependency:go-offline -q || true
 
 # Expose port
 EXPOSE 8080
 
-# Start server
+# Start Jetty using Maven plugin
 ENV PORT=8080
-CMD ["java", "-cp", "target/classes:target/*", "-Dport=${PORT}", "org.eclipse.jetty.ee10.maven.plugin.MavenWebAppContext"]
+CMD ["mvn", "jetty:run", "-Djetty.http.port=${PORT}"]
