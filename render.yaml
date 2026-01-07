@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: blood-donation-api
+    name: blood-donation-request-matching
     runtime: docker
     plan: free
     envVars:
