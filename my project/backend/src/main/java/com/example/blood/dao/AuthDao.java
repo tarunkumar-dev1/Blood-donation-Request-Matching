@@ -58,15 +58,14 @@ public class AuthDao {
         String normalizedPhone = normalize(phone);
         try (Connection conn = Db.getConnection()) {
             ensureTable(conn);
-            
+
+            // Match on fully normalized E.164 number to avoid DB-specific regex functions
             try (PreparedStatement ps = conn.prepareStatement(
-                    "SELECT number, password FROM user_credentials " +
-                    "WHERE REGEXP_REPLACE(number, '[^0-9]', '') = REGEXP_REPLACE(?, '[^0-9]', '')")) {
+                    "SELECT number, password FROM user_credentials WHERE number = ?")) {
                 ps.setString(1, normalizedPhone);
                 try (ResultSet rs = ps.executeQuery()) {
                     if (rs.next()) {
                         String hashedPassword = rs.getString("password");
-                        // Verify the provided password against the stored hash
                         if (PasswordUtil.verifyPassword(password, hashedPassword)) {
                             return Optional.of(new AuthUser(rs.getString("number"), hashedPassword));
                         }

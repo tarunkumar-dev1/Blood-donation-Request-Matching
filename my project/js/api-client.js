@@ -9,7 +9,8 @@
       res = await fetch(url, {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams(payload)
+        body: new URLSearchParams(payload),
+        credentials: 'include'
       });
     } catch (err) {
       throw new Error('Network error. Is the backend running at ' + base + '?');

@@ -202,8 +202,9 @@
 			if(!isIndianNumber(phone)){ alert('Enter a valid Indian mobile number (10 digits, optionally prefixed with +91 or 0).'); return; }
 			try { await window.apiClient.auth.register(normalizeToE164(phone), password); } catch(err){ alert(err.message || 'Signup failed'); return; }
 			localStorage.setItem('bd_user', JSON.stringify({ phone: normalizeToE164(phone), name: fullName }));
-			alert('Account created');
+			alert('Account created. Now complete your donor registration.');
 			form.reset();
+			location.href = 'donor.html';
 		});
 	})();
 	</script>

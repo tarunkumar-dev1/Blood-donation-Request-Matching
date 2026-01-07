@@ -168,7 +168,9 @@ body.modal-open .modal-overlay{display:flex}
 	closeBtn.addEventListener('click', ()=>{ document.body.classList.remove('modal-open'); modal.setAttribute('aria-hidden','true');});
 	cancelBtn.addEventListener('click', ()=>{ document.body.classList.remove('modal-open'); modal.setAttribute('aria-hidden','true');});
 	form.addEventListener('submit', async function(e){ e.preventDefault(); 
-		const phone=document.getElementById('modalPhone').value.trim(); const password=document.getElementById('modalPass').value.trim(); if(!phone){alert('Enter phone');return;} try{ await window.apiClient.auth.login(phone,password); }catch(err){ alert(err.message||'Login failed'); return; } localStorage.setItem('bd_user',JSON.stringify({phone})); updateBadge(); document.body.classList.remove('modal-open'); modal.setAttribute('aria-hidden','true'); location.href='index.html'; });
+		const phone=document.getElementById('modalPhone').value.trim(); const password=document.getElementById('modalPass').value.trim(); if(!phone){alert('Enter phone');return;} 
+		function normalizeToE164(d){ const digits = d.replace(/\D/g,''); const core = digits.slice(-10); return '+91' + core; }
+		try{ await window.apiClient.auth.login(normalizeToE164(phone),password); }catch(err){ alert(err.message||'Login failed'); return; } localStorage.setItem('bd_user',JSON.stringify({phone: normalizeToE164(phone)})); updateBadge(); document.body.classList.remove('modal-open'); modal.setAttribute('aria-hidden','true'); location.href='bmatch.html'; });
 	updateBadge();
 })();
 </script>

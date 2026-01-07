@@ -22,11 +22,19 @@ public class SecurityHeadersFilter extends HttpFilter {
             throws IOException, ServletException {
         
         // Add CORS headers for cross-origin requests
-        response.addHeader("Access-Control-Allow-Origin", "*");
-        response.addHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-        response.addHeader("Access-Control-Allow-Headers", "Content-Type, Authorization, X-Requested-With");
-        response.addHeader("Access-Control-Allow-Credentials", "true");
-        response.addHeader("Access-Control-Max-Age", "3600");
+        String origin = request.getHeader("Origin");
+        if (origin != null && !origin.isBlank()) {
+            // Echo requesting origin when credentials are used; wildcard is invalid with credentials
+            response.setHeader("Access-Control-Allow-Origin", origin);
+            response.setHeader("Vary", "Origin");
+            response.setHeader("Access-Control-Allow-Credentials", "true");
+        } else {
+            // Fallback for same-origin or file:// usage where Origin may be absent
+            response.setHeader("Access-Control-Allow-Origin", "*");
+        }
+        response.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+        response.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization, X-Requested-With");
+        response.setHeader("Access-Control-Max-Age", "3600");
         
         // Security headers to prevent common vulnerabilities
         response.addHeader("X-Content-Type-Options", "nosniff");  // Prevent MIME type sniffing

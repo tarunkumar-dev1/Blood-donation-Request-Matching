@@ -190,7 +190,7 @@
 		openButtons.forEach(b=>b.addEventListener('click', e=>{ e.preventDefault(); document.body.classList.add('modal-open'); modal.setAttribute('aria-hidden','false'); }));
 		closeBtn.addEventListener('click', ()=>{ document.body.classList.remove('modal-open'); modal.setAttribute('aria-hidden','true');});
 		cancelBtn.addEventListener('click', ()=>{ document.body.classList.remove('modal-open'); modal.setAttribute('aria-hidden','true');});
-		form.addEventListener('submit', async function(e){ e.preventDefault(); const phone=document.getElementById('modalPhone').value.trim(); const password=document.getElementById('modalPass').value.trim(); if(!phone){alert('Enter phone');return;} try{ await window.apiClient.auth.register(phone,password); }catch(err){ alert(err.message||'Failed to register'); return; } localStorage.setItem('bd_user',JSON.stringify({phone})); updateBadge(); document.body.classList.remove('modal-open'); modal.setAttribute('aria-hidden','true'); location.href='index.html'; });
+		form.addEventListener('submit', async function(e){ e.preventDefault(); const phone=document.getElementById('modalPhone').value.trim(); const password=document.getElementById('modalPass').value.trim(); if(!phone){alert('Enter phone');return;} try{ await window.apiClient.auth.login(phone,password); }catch(err){ alert(err.message||'Login failed'); return; } localStorage.setItem('bd_user',JSON.stringify({phone})); updateBadge(); document.body.classList.remove('modal-open'); modal.setAttribute('aria-hidden','true'); location.href='donor.html'; });
 		updateBadge();
 	})();
 	</script>
