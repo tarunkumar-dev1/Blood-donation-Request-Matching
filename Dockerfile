@@ -5,13 +5,10 @@ WORKDIR /build
 # Copy entire project
 COPY . .
 
-# Navigate to backend directory
+# Navigate to backend
 WORKDIR /build/my project/backend
 
-# Download all dependencies first
-RUN mvn dependency:resolve -q
-
-# Build application
+# Build application - this creates target directory with all JARs
 RUN mvn clean package -DskipTests -q
 
 # Runtime stage
@@ -19,14 +16,12 @@ FROM eclipse-temurin:17-jre-alpine
 
 WORKDIR /app
 
-# Copy built JAR and dependencies from build stage
-COPY --from=build /build/my project/backend/target/classes ./target/classes
-COPY --from=build /build/my project/backend/target/lib ./target/lib
-COPY --from=build /build/my project/backend/target/dependency ./target/dependency
+# Copy entire target directory from build
+COPY --from=build "/build/my project/backend/target" ./target
 
 # Expose port
 EXPOSE 8080
 
-# Start server
+# Start server using the JAR files in target
 ENV PORT=8080
-CMD ["java", "-cp", "target/classes:target/lib/*:target/dependency/*", "-Dport=${PORT}", "org.eclipse.jetty.ee10.maven.plugin.MavenWebAppContext"]
+CMD ["java", "-cp", "target/classes:target/*", "-Dport=${PORT}", "org.eclipse.jetty.ee10.maven.plugin.MavenWebAppContext"]
