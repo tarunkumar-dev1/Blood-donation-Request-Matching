@@ -1,6 +1,6 @@
 (function(){
   const isFile = window.location.protocol === 'file:';
-  const defaultBase = isFile ? 'http://localhost:8080/api' : '/api';
+  const defaultBase = isFile ? 'https://blood-donation-api.onrender.com/api' : '/api';
   const base = (window.backendConfig && window.backendConfig.baseUrl) || defaultBase;
 
   async function post(url, payload){

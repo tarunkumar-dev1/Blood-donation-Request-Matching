@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: blood-donation-api
+    runtime: java
+    buildCommand: mvn -f "my project/backend/pom.xml" clean package
+    startCommand: java -cp "my project/backend/target/classes:my project/backend/target/dependency/*" -Dport=$PORT org.eclipse.jetty.ee10.maven.plugin.MavenWebAppContext
+    plan: free
+    envVars:
+      - key: ADMIN_USER
+        value: bloodadmin
+      - key: ADMIN_PASS
+        value: BloodApp2026!Secure
+      - key: DB_TYPE
+        value: h2
+      - key: PORT
+        value: 8080
+    autoDeploy: true
